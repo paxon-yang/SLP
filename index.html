@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Viewer - Scanned Pages</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="title">📄 Document Viewer</h1>
+            <p class="subtitle">View and download scanned document pages</p>
+        </div>
+    </header>
+
+    <nav class="toolbar">
+        <div class="container">
+            <div class="toolbar-left">
+                <span class="page-count">Total Pages: <span id="pageCount">78</span></span>
+            </div>
+            <div class="toolbar-right">
+                <button id="downloadPdf" class="btn btn-primary">
+                    📥 Download as PDF
+                </button>
+                <button id="viewMode" class="btn btn-secondary">
+                    🔄 Toggle View
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="container">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Loading document pages...</p>
+            </div>
+            
+            <div class="image-grid" id="imageGrid"></div>
+            
+            <div class="image-viewer" id="imageViewer" style="display: none;">
+                <div class="viewer-header">
+                    <button id="closeViewer" class="btn btn-close">✕ Close</button>
+                    <span class="viewer-title">Page <span id="currentPage">1</span> of <span id="totalPages">78</span></span>
+                    <div class="viewer-controls">
+                        <button id="prevPage" class="btn btn-nav">← Previous</button>
+                        <button id="nextPage" class="btn btn-nav">Next →</button>
+                    </div>
+                </div>
+                <div class="viewer-content">
+                    <img id="viewerImage" src="" alt="Document page">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Document Viewer. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
