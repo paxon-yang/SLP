@@ -103,16 +103,45 @@ class DocumentViewer {
         card.className = 'image-card';
         card.addEventListener('click', () => this.openImageViewer(index));
 
+        // Estimate file size based on typical compressed JPEG sizes
+        const estimatedSize = this.getEstimatedFileSize(index);
+
         card.innerHTML = `
             <img src="${image.filename}" alt="${image.title}" loading="lazy" 
                  onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzZjNzU3ZCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4='">
             <div class="image-info">
                 <div class="image-title">${image.title}</div>
-                <div class="image-meta">Document Page ${image.pageNumber}</div>
+                <div class="image-size">${estimatedSize}</div>
+                <div class="image-hint">Click image to view original size</div>
             </div>
         `;
 
         return card;
+    }
+
+    // Get estimated file size for display
+    getEstimatedFileSize(index) {
+        // Based on the actual compressed file sizes from the compression log
+        const fileSizes = [
+            "124.5 KB", "280.4 KB", "308.8 KB", "304.5 KB", "339.2 KB", 
+            "195.9 KB", "190.3 KB", "131.9 KB", "138.4 KB", "194.4 KB",
+            "423.5 KB", "229.3 KB", "192.4 KB", "295.5 KB", "187.4 KB",
+            "251.4 KB", "217.4 KB", "252.7 KB", "240.8 KB", "226.8 KB",
+            "232.4 KB", "252.4 KB", "295.3 KB", "313.7 KB", "166.7 KB",
+            "183.4 KB", "200.6 KB", "184.4 KB", "209.1 KB", "174.9 KB",
+            "173.4 KB", "227.6 KB", "239.4 KB", "236.0 KB", "210.4 KB",
+            "256.9 KB", "291.9 KB", "205.0 KB", "200.6 KB", "288.7 KB",
+            "237.0 KB", "230.8 KB", "233.8 KB", "218.3 KB", "248.7 KB",
+            "274.5 KB", "241.0 KB", "258.7 KB", "200.8 KB", "268.3 KB",
+            "254.6 KB", "269.1 KB", "202.9 KB", "182.4 KB", "244.1 KB",
+            "259.1 KB", "98.8 KB", "247.5 KB", "234.8 KB", "252.4 KB",
+            "173.8 KB", "276.8 KB", "87.4 KB", "265.1 KB", "336.8 KB",
+            "239.5 KB", "173.5 KB", "181.3 KB", "203.1 KB", "235.1 KB",
+            "215.1 KB", "238.5 KB", "245.5 KB", "306.1 KB", "271.1 KB",
+            "215.5 KB", "160.0 KB", "121.2 KB"
+        ];
+        
+        return fileSizes[index] || "~200 KB";
     }
 
     // Open image viewer modal
